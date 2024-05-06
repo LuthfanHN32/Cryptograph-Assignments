@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Cryptograph | Encryption</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- BOOTSTRAP CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+
+      .bold-text {
+        font-weight: bold;
+      }
+
+      .size-1 {
+        font-size: 22px;
+      }
+
+      .size-2 {
+        font-size: 35px;
+      }
+    </style>
+  </head>
+  <body style="background-color: #dafdff">
+    <!-- Encryption Content START! -->
+    <div
+      class="container-lg d-flex justify-content-center align-items-center"
+      style="height: 80vh"
+    >
+      <div class="d-flex flex-column">
+        <h2 class="bold-text size-2 p-3 text-center">
+          CRYPTOGRAPHY ENCRYPTION
+        </h2>
+        <div class="form-floating">
+          <h3 class="bold-text">Insert Plaintext:</h3>
+          <textarea
+            id="plaintext"
+            class="form-control p-2"
+            style="
+              resize: none;
+              border-radius: 5px;
+              height: 100px;
+              width: 800px;
+            "
+          ></textarea>
+        </div>
+        <div class="form-floating py-3">
+          <h4 class="bold-text">Insert Key:</h4>
+          <input
+            type="text"
+            class="form-control p-2"
+            style="resize: none; border-radius: 4px; height: 40px"
+            id="encryptionKey"
+          />
+        </div>
+        <div
+          class="d-flex flex-rows justify-content-center align-items-center gap-3 m-2"
+        >
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg"
+            data-bs-toggle="modal"
+            data-bs-target="#enkripsi"
+            onclick="encrypt()"
+          >
+            Encrypt Text
+          </button>
+          <a href="index.html" class="btn btn-secondary btn-lg">Home</a>
+        </div>
+      </div>
+    </div>
+    <!-- Encryption Content END! -->
+
+    <!-- Modal Enkripsi START! -->
+    <div
+      class="modal fade"
+      id="enkripsi"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <h1 class="modal-title fs-5 bold-text" id="exampleModalLabel">
+              Encryption
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="hasilenkripsi">
+              <textarea
+                class="form-control"
+                id="ciphertext"
+                style="height: 300px; resize: none"
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="popover"
+              data-bs-trigger="hover focus"
+              data-bs-content="Copy ke clipboard"
+              onclick="copy()"
+            >
+              Copy to Clipboard
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Enkripsi END! -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function encrypt() {
+        var plaintext = document.getElementById("plaintext").value;
+        var encryptionKey = document.getElementById("encryptionKey").value;
+
+        // Fungsi untuk mengenkripsi teks
+        function encryptText(text, key) {
+          return CryptoJS.AES.encrypt(text, key).toString();
+        }
+
+        var encryptedText = encryptText(plaintext, encryptionKey);
+
+        // Menetapkan hasil enkripsi ke dalam textarea
+        document.getElementById("ciphertext").value = encryptedText;
+      }
+
+      function copy() {
+        // Get the text field
+        var copyText = document.getElementById("ciphertext");
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        // Alert the copied text
+        alert("Text di copy: " + copyText.value);
+      }
+    </script>
+  </body>
+</html>
