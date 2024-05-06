@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Cryptograph | Encryption</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Cripto JS -->
+    <div>
+      <script src="cryptojs/src/core.js"></script>
+      <script src="cryptojs/src/lib-typedarrays.js"></script>
+      <script src="cryptojs/src/x64-core.js"></script>
+      <script src="cryptojs/src/enc-utf16.js"></script>
+      <script src="cryptojs/src/enc-base64.js"></script>
+      <script src="cryptojs/src/enc-base64url.js"></script>
+      <script src="cryptojs/src/md5.js"></script>
+      <script src="cryptojs/src/sha1.js"></script>
+      <script src="cryptojs/src/sha256.js"></script>
+      <script src="cryptojs/src/sha224.js"></script>
+      <script src="cryptojs/src/sha512.js"></script>
+      <script src="cryptojs/src/sha384.js"></script>
+      <script src="cryptojs/src/sha3.js"></script>
+      <script src="cryptojs/src/ripemd160.js"></script>
+      <script src="cryptojs/src/hmac.js"></script>
+      <script src="cryptojs/src/pbkdf2.js"></script>
+      <script src="cryptojs/src/evpkdf.js"></script>
+      <script src="cryptojs/src/cipher-core.js"></script>
+      <script src="cryptojs/src/mode-cfb.js"></script>
+      <script src="cryptojs/src/mode-ctr.js"></script>
+      <script src="cryptojs/src/mode-ofb.js"></script>
+      <script src="cryptojs/src/mode-ecb.js"></script>
+      <script src="cryptojs/src/pad-ansix923.js"></script>
+      <script src="cryptojs/src/pad-iso10126.js"></script>
+      <script src="cryptojs/src/pad-zeropadding.js"></script>
+      <script src="cryptojs/src/pad-iso97971.js"></script>
+      <script src="cryptojs/src/pad-nopadding.js"></script>
+      <script src="cryptojs/src/rc4.js"></script>
+      <script src="cryptojs/src/rabbit.js"></script>
+      <script src="cryptojs/src/rabbit-legacy.js"></script>
+      <script src="cryptojs/src/aes.js"></script>
+      <script src="cryptojs/src/tripledes.js"></script>
+    </div>
+
+    <!-- BOOTSTRAP CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+
+      .bold-text {
+        font-weight: bold;
+      }
+
+      .size-1 {
+        font-size: 22px;
+      }
+
+      .size-2 {
+        font-size: 35px;
+      }
+    </style>
+  </head>
+  <body style="background-color: #dafdff">
+    <!-- Encryption Content START! -->
+    <form class="formEncrypt" method="post" enctype="multipart/form-data">
+      <div
+        class="container-lg d-flex justify-content-center align-items-center"
+        style="height: 95vh"
+      >
+        <div class="d-flex flex-column">
+          <h2 class="bold-text size-2 p-3 text-center">MODERN CRYPTOGRAPHY</h2>
+          <div class="form-floating">
+            <h3 class="bold-text">Insert Plaintext:</h3>
+            <textarea
+              class="form-control p-2"
+              name="text"
+              style="
+                resize: none;
+                border-radius: 5px;
+                height: 100px;
+                width: 800px;
+              "
+            ></textarea>
+          </div>
+
+          <div class="form-floating py-3">
+            <h4 class="bold-text">Insert Key:</h4>
+            <input
+              type="text"
+              name="key"
+              class="form-control p-2"
+              style="resize: none; border-radius: 4px; height: 40px"
+              id="encryptionKey"
+            />
+          </div>
+
+          <div class="d-flex flex-colum gap-3">
+            <h4 class="bold-text">Algorithm:</h4>
+            <label class="size-1"
+              ><input
+                name="algorithm"
+                value="AES"
+                type="radio"
+                checked="checked"
+              />AES</label
+            >
+            <label class="size-1"
+              ><input name="algorithm" value="RC4" type="radio" />RC4</label
+            >
+            <label class="size-1"
+              ><input name="algorithm" value="TripleDES" type="radio" />Triple
+              DES (3DES)</label
+            >
+            <label class="size-1"
+              ><input
+                name="algorithm"
+                value="Rabbit"
+                type="radio"
+              />Rabbit</label
+            >
+          </div>
+
+          <div class="d-flex flex-rows gap-3 pt-2">
+            <h4 class="bold-text">Choose Action:</h4>
+            <label class="size-1"
+              ><input
+                name="action"
+                value="1"
+                checked="checked"
+                type="radio"
+              />Encrypt</label
+            >
+            <label class="size-1"
+              ><input name="action" value="2" type="radio" />Decrypt</label
+            >
+          </div>
+
+          <div class="size-1" style="font-weight: bold">
+            <label
+              ><input name="format" value="1" type="checkbox" /> Use
+              Base64</label
+            >
+          </div>
+          <div
+            class="d-flex flex-rows justify-content-center align-items-center gap-3 m-2"
+          >
+            <button class="execute btn btn-primary btn-lg" type="submit">
+              Execute Text
+            </button>
+            <button
+              class="ClearForm btn btn-primary btn-lg"
+              type="submit"
+              onclick="window.location.reload(true);"
+            >
+              Clear Text
+            </button>
+            <!-- <a href="#index.html" class="btn btn-secondary btn-lg">Home</a> -->
+          </div>
+          <div>
+            <h3 class="bold-text">Result</h3>
+            <textarea
+              class="resultText form-control p-2"
+              style="
+                resize: none;
+                border-radius: 5px;
+                height: 100px;
+                width: 800px;
+              "
+            ></textarea>
+          </div>
+          <h6 class="p-2">
+            <b>Note:</b> Untuk melakukan Decrypt dapat menggunakan Ciphertext
+            Result
+          </h6>
+        </div>
+      </div>
+    </form>
+    <!-- Encryption Content END! -->
+
+    <script type="application/javascript">
+      var FileName = "ResultText.txt";
+
+      function copyToClipboard(str) {
+        var el = document.createElement("textarea");
+        el.value = str;
+        el.setAttribute("readonly", "");
+        el.style.position = "absolute";
+        el.style.left = "-9999px";
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+      }
+
+      document.addEventListener("click", function OnClick(event) {
+        var $this = event.target;
+        var ActionNameClass = "copy";
+        if ($this.classList.contains(ActionNameClass)) {
+          event.preventDefault();
+          var resultText = document.querySelector(".resultText");
+          copyToClipboard(resultText.value);
+          return false;
+        }
+        var ActionNameClass = "saveFile";
+        if ($this.classList.contains(ActionNameClass)) {
+          event.preventDefault();
+          var resultText = document.querySelector(".resultText");
+          var hiddenElement = document.createElement("a");
+          hiddenElement.href =
+            "data:attachment/text," + encodeURI(resultText.value);
+          hiddenElement.target = "_blank";
+          hiddenElement.download = FileName;
+          hiddenElement.click();
+          return false;
+        }
+      });
+
+      document.addEventListener("change", function OnClick(event) {
+        var $this = event.target;
+        var ActionNameClass = "fileText";
+        if ($this.classList.contains(ActionNameClass)) {
+          event.preventDefault();
+          var fileText = document.querySelector(
+            '.formEncrypt [name="fileText"]'
+          );
+          FileName = fileText.value.split("/").pop().split("\\").pop();
+          var text = document.querySelector('.formEncrypt [name="text"]');
+          var reader = new FileReader();
+          reader.onload = function () {
+            text.value = reader.result;
+          };
+          reader.readAsText(fileText.files[0]);
+          fileText.value = "";
+          return false;
+        }
+      });
+
+      document.addEventListener("submit", function OnClick(event) {
+        var $this = event.target;
+        var ActionNameClass = "formEncrypt";
+        if ($this.classList.contains(ActionNameClass)) {
+          event.preventDefault();
+          var resultText = document.querySelector(".resultText");
+          var resultStr = "";
+          resultText.value = "";
+          var formData = new FormData($this);
+          var text = formData.get("text");
+          var key = formData.get("key");
+          var algorithm = formData.get("algorithm");
+          var action = formData.get("action");
+          var format = formData.get("format");
+          // Encrypt
+          if (action == 1) {
+            if (algorithm == "AES") {
+              var cipherText = CryptoJS.AES.encrypt(text, key).toString();
+            }
+            if (algorithm == "RC4") {
+              var cipherText = CryptoJS.RC4.encrypt(text, key).toString();
+            }
+            if (algorithm == "TripleDES") {
+              var cipherText = CryptoJS.TripleDES.encrypt(text, key).toString();
+            }
+            if (algorithm == "Rabbit") {
+              var cipherText = CryptoJS.Rabbit.encrypt(text, key).toString();
+            }
+            if (format == 1) {
+              resultStr = btoa(cipherText);
+            } else {
+              resultStr = cipherText;
+              console.log(cipherText);
+            }
+          }
+          // Decrypt
+          if (action == 2) {
+            if (format == 1) {
+              text = atob(text);
+            }
+            if (algorithm == "AES") {
+              var bytes = CryptoJS.AES.decrypt(text, key);
+            }
+            if (algorithm == "RC4") {
+              var bytes = CryptoJS.RC4.decrypt(text, key);
+            }
+            if (algorithm == "TripleDES") {
+              var bytes = CryptoJS.TripleDES.decrypt(text, key);
+            }
+            if (algorithm == "Rabbit") {
+              var bytes = CryptoJS.Rabbit.decrypt(text, key);
+            }
+            var originalText = bytes.toString(CryptoJS.enc.Utf8);
+            resultStr = originalText;
+          }
+          resultText.value = resultStr;
+          return false;
+        }
+      });
+    </script>
+  </body>
+</html>
